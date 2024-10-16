@@ -1,5 +1,6 @@
 # kriptografi
-nadia
+Nama : Nadiatul umah
+Kelas : Ti.22.A5
 
 ![Screenshot (262)](https://github.com/user-attachments/assets/9d719743-e3c8-406a-a882-44184e227140)
 
