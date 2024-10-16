@@ -77,32 +77,6 @@ def decrypt(ciphertext, key):
   return plaintext
 
 
-key = "TEKNIKINFORMATIKA"
-plaintext1 = "GOODBROOMSWEEPCLEAN"
-plaintext2 = "REDWOODNATIONALSTATEPARK"
-plaintext3 = "JUNKFOODANDHEALTHPROBLEMS"
-
-ciphertext1 = encrypt(plaintext1, key)
-ciphertext2 = encrypt(plaintext2, key)
-ciphertext3 = encrypt(plaintext3, key)
-
-decrypted_text1 = decrypt(ciphertext1, key)
-decrypted_text2 = decrypt(ciphertext2, key)
-decrypted_text3 = decrypt(ciphertext3, key)
-
-
-print("Plaintext 1:", plaintext1)
-print("Ciphertext 1:", ciphertext1)
-print("Decrypted Text 1:", decrypted_text1)
-
-print("\nPlaintext 2:", plaintext2)
-print("Ciphertext 2:", ciphertext2)
-print("Decrypted Text 2:", decrypted_text2)
-
-
-print("\nPlaintext 3:", plaintext3)
-print("Ciphertext 3:", ciphertext3)
-print("Decrypted Text 3:", decrypted_text3)
 
 
 ![potoo](https://github.com/user-attachments/assets/6c2cb8a8-3678-4b91-92bc-9647c0a5fdb7)
