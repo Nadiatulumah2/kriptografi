@@ -1,6 +1,7 @@
 # Nama: Nadiatul umah
 
-# def prepare_key(key):
+# Generate preparekey  
+def prepare_key(key):
   key = key.upper().replace("J", "I")
   key_matrix = []
   for char in key:
@@ -13,7 +14,7 @@
   matrix = [key_matrix[i:i+5] for i in range(0, 25, 5)]
   return matrix
 
-# code 
+# find position matrix 
 def find_position(matrix, char):
   for i in range(5):
     for j in range(5):
@@ -21,7 +22,8 @@ def find_position(matrix, char):
         return (i, j)
   return None
 
-# def encrypt(plaintext, key):
+#  encrypt plaintext
+def encrypt(plaintext, key):
   matrix = prepare_key(key)
   plaintext = plaintext.upper().replace("J", "I")
   plaintext = "".join(filter(str.isalpha, plaintext))
@@ -50,7 +52,8 @@ def find_position(matrix, char):
   return ciphertext
 
 
-# def decrypt(ciphertext, key):
+# decrypt ciphertext 
+def decrypt(ciphertext, key):
   matrix = prepare_key(key)
   plaintext = ""
 
