@@ -1,6 +1,6 @@
 # Nama: Nadiatul umah
 
-def prepare_key(key):
+# def prepare_key(key):
   key = key.upper().replace("J", "I")
   key_matrix = []
   for char in key:
