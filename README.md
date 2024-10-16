@@ -1,11 +1,6 @@
-#Nama: Nadiatul umah
-# prompt: Enkripsi Playfair Cihper pada plaintext:
-# GOOD BROOM SWEEP CLEAN
-# REDWOOD NATIONAL STATE PARK
-# JUNK FOOD AND HEALTH PROBLEMS
-# Dengan kunci “TEKNIK INFORMATIKA"
+# Nama: Nadiatul umah
 
-# def prepare_key(key):
+def prepare_key(key):
   key = key.upper().replace("J", "I")
   key_matrix = []
   for char in key:
