@@ -13,7 +13,8 @@
   matrix = [key_matrix[i:i+5] for i in range(0, 25, 5)]
   return matrix
 
-# def find_position(matrix, char):
+# code 
+def find_position(matrix, char):
   for i in range(5):
     for j in range(5):
       if matrix[i][j] == char:
