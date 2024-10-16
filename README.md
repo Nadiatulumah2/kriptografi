@@ -1,80 +1,87 @@
-# Nama: Nadiatul umah
+# Playfair_chiper
 
-# Generate preparekey  
-def prepare_key(key):
-  key = key.upper().replace("J", "I")
-  key_matrix = []
-  for char in key:
-    if char not in key_matrix and char.isalpha():
-      key_matrix.append(char)
-  for char in range(ord('A'), ord('Z') + 1):
-    char = chr(char)
-    if char not in key_matrix and char != 'J':
-      key_matrix.append(char)
-  matrix = [key_matrix[i:i+5] for i in range(0, 25, 5)]
-  return matrix
+Nama: Nadiatul umah
 
-# find position matrix 
-def find_position(matrix, char):
-  for i in range(5):
-    for j in range(5):
-      if matrix[i][j] == char:
-        return (i, j)
-  return None
-
-#  encrypt plaintext
-def encrypt(plaintext, key):
-  matrix = prepare_key(key)
-  plaintext = plaintext.upper().replace("J", "I")
-  plaintext = "".join(filter(str.isalpha, plaintext))
-
-  if len(plaintext) % 2 != 0:
-    plaintext += 'X'
-
-  ciphertext = ""
-  for i in range(0, len(plaintext), 2):
-    char1 = plaintext[i]
-    char2 = plaintext[i+1]
-
-    row1, col1 = find_position(matrix, char1)
-    row2, col2 = find_position(matrix, char2)
-
-    if row1 == row2:
-      ciphertext += matrix[row1][(col1 + 1) % 5]
-      ciphertext += matrix[row2][(col2 + 1) % 5]
-    elif col1 == col2:
-      ciphertext += matrix[(row1 + 1) % 5][col1]
-      ciphertext += matrix[(row2 + 1) % 5][col2]
-    else:
-      ciphertext += matrix[row1][col2]
-      ciphertext += matrix[row2][col1]
-
-  return ciphertext
+Kelas : Ti.22.a5
 
 
-# decrypt ciphertext 
-def decrypt(ciphertext, key):
-  matrix = prepare_key(key)
-  plaintext = ""
+```
+# playfair_chiper
+# Membuat tabel 5x5 Playfair Cipher
+def create_table(key):
+    alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+    key = "".join(dict.fromkeys(key.upper().replace("J", "I")))  # Hilangkan duplikat, ganti J dengan I
+    table = [c for c in key if c in alphabet]
+    for c in alphabet:
+        if c not in table:
+            table.append(c)
+    return [table[i:i + 5] for i in range(0, 25, 5)]
 
-  for i in range(0, len(ciphertext), 2):
-    char1 = ciphertext[i]
-    char2 = ciphertext[i+1]
+# Mendapatkan posisi dari huruf di tabel
+def get_position(table, char):
+    for row in range(5):
+        for col in range(5):
+            if table[row][col] == char:
+                return row, col
+    return None
 
-    row1, col1 = find_position(matrix, char1)
-    row2, col2 = find_position(matrix, char2)
+# Memproses plaintext menjadi digram
+def prepare_text(text):
+    text = text.upper().replace("J", "I").replace(" ", "")
+    prepared_text = []
+    i = 0
+    while i < len(text):
+        if i + 1 < len(text) and text[i] == text[i + 1]:
+            prepared_text.append(text[i] + 'X')
+            i += 1
+        else:
+            prepared_text.append(text[i:i + 2])
+            i += 2
+    if len(prepared_text[-1]) == 1:
+        prepared_text[-1] += 'X'
+    return prepared_text
 
-    if row1 == row2:
-      plaintext += matrix[row1][(col1 - 1) % 5]
-      plaintext += matrix[row2][(col2 - 1) % 5]
-    elif col1 == col2:
-      plaintext += matrix[(row1 - 1) % 5][col1]
-      plaintext += matrix[(row2 - 1) % 5][col2]
-    else:
-      plaintext += matrix[row1][col2]
-      plaintext += matrix[row2][col1]
+# Enkripsi menggunakan aturan Playfair Cipher
+def encrypt_playfair(plaintext, table):
+    digrams = prepare_text(plaintext)
+    ciphertext = ""
+    
+    for digram in digrams:
+        row1, col1 = get_position(table, digram[0])
+        row2, col2 = get_position(table, digram[1])
+        
+        # Aturan enkripsi Playfair Cipher
+        if row1 == row2:
+            ciphertext += table[row1][(col1 + 1) % 5] + table[row2][(col2 + 1) % 5]
+        elif col1 == col2:
+            ciphertext += table[(row1 + 1) % 5][col1] + table[(row2 + 1) % 5][col2]
+        else:
+            ciphertext += table[row1][col2] + table[row2][col1]
+    
+    return ciphertext
 
-  return plaintext
+# Kunci dan teks yang akan dienkripsi
+key = "TEKNIK INFORMATIKA"
+plaintexts = [
+    "GOOD BROOM SWEEP CLEAN",
+    "REDWOOD NATIONAL STATE PARK",
+    "JUNK FOOD AND HEALTH PROBLEMS"
+]
+
+# Membuat tabel Playfair Cipher
+table = create_table(key)
+print("Tabel Playfair Cipher:")
+for row in table:
+    print(row)
+
+# Enkripsi setiap teks
+for plaintext in plaintexts:
+    ciphertext = encrypt_playfair(plaintext, table)
+    print(f"Plaintext: {plaintext}")
+    print(f"Ciphertext: {ciphertext}")
+    print()    
+
+```
 
 
 
